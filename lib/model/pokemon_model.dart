@@ -1,22 +1,26 @@
 import 'dart:convert';
 
-PokemonModel homeModelFromJson(String str) => PokemonModel.fromJson(json.decode(str));
+PokemonModel pokemonModelFromJson(String str) => PokemonModel.fromJson(json.decode(str));
 
-String homeModelToJson(PokemonModel data) => json.encode(data.toJson());
+String pokemonModelToJson(PokemonModel data) => json.encode(data.toJson());
 
 class PokemonModel {
   PokemonModel({
     required this.sprites,
+    required this.name,
   });
 
   Sprites sprites;
+  String name;
 
   factory PokemonModel.fromJson(Map<String, dynamic> json) => PokemonModel(
     sprites: Sprites.fromJson(json["sprites"]),
+    name: json["name"],
   );
 
   Map<String, dynamic> toJson() => {
     "sprites": sprites.toJson(),
+    "name": name,
   };
 }
 
@@ -55,27 +59,15 @@ class Other {
 class Home {
   Home({
     required this.frontDefault,
-    required this.frontFemale,
-    required this.frontShiny,
-    required this.frontShinyFemale,
   });
 
   String frontDefault;
-  dynamic frontFemale;
-  String frontShiny;
-  dynamic frontShinyFemale;
 
   factory Home.fromJson(Map<String, dynamic> json) => Home(
     frontDefault: json["front_default"],
-    frontFemale: json["front_female"],
-    frontShiny: json["front_shiny"],
-    frontShinyFemale: json["front_shiny_female"],
   );
 
   Map<String, dynamic> toJson() => {
     "front_default": frontDefault,
-    "front_female": frontFemale,
-    "front_shiny": frontShiny,
-    "front_shiny_female": frontShinyFemale,
   };
 }

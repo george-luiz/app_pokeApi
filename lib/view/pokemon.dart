@@ -1,3 +1,4 @@
+import 'package:api_pokemon/components/tela_erro.dart';
 import 'package:api_pokemon/model/pokemon_model.dart';
 import 'package:flutter/material.dart';
 import '../view-model/api_pokemon.dart';
@@ -18,11 +19,10 @@ class Personagem extends StatelessWidget {
             future: apiPokemon(
                 parametroUrl: "https://pokeapi.co/api/v2/pokemon/${nome}"),
             builder: (context, snapshot) {
-              if (snapshot.hasError || !snapshot.hasData) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (snapshot.hasData) {
+              if (snapshot.hasError) {
+                return const telaErro();
+              } 
+              else if (snapshot.hasData) {
                 final listaPokemon = snapshot.data!;
 
                 return Column(
